@@ -6,7 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('Test colorFromHex:', () {
     group('Valid formats test:', () {
-      const Set<String> valid6digits = {'aBc', '#aBc', 'aaBBcc', '#aaBBcc'}, valid8digits = {'00aaBBcc', '#00aaBBcc'};
+      const Set<String> valid6digits = {'aBc', '#aBc', 'aaBBcc', '#aaBBcc'},
+          valid8digits = {'00aaBBcc', '#00aaBBcc'};
 
       const Color expectedColor = Color(0xffaabbcc), expectedColorTransparent = Color(0x00aabbcc);
 
@@ -138,8 +139,8 @@ void main() {
           final StringBuffer buffer = StringBuffer();
           for (int i = 0; i <= 9; i++) {
             buffer.write(i.toString());
-            expect(
-                colorFromHex(buffer.toString(), enableAlpha: false), (i == 7 || i == 5 || i == 2) ? isNot(null) : null);
+            expect(colorFromHex(buffer.toString(), enableAlpha: false),
+                (i == 7 || i == 5 || i == 2) ? isNot(null) : null);
           }
         },
       );
@@ -211,7 +212,7 @@ void main() {
       final String transparency = string.substring(4);
       test(
         'It should convert $color: to #${transparency + string} with hash',
-        () => expect(colorToHex(color, includeHashSign: true), '#' + transparency + string),
+        () => expect(colorToHex(color, includeHashSign: true), '#$transparency$string'),
       );
     });
 
@@ -219,8 +220,8 @@ void main() {
       final String transparency = string.substring(4).toLowerCase();
       test(
         'It should convert $color: to #${transparency + string.toLowerCase()}, with hash, to lower case',
-        () => expect(
-            colorToHex(color, includeHashSign: true, toUpperCase: false), '#' + transparency + string.toLowerCase()),
+        () => expect(colorToHex(color, includeHashSign: true, toUpperCase: false),
+            '#$transparency${string.toLowerCase()}'),
       );
     });
 

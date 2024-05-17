@@ -1,4 +1,5 @@
 /// Common function lib
+library utils;
 
 import 'dart:math';
 import 'package:flutter/painting.dart';

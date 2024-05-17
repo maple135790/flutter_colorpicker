@@ -1,6 +1,8 @@
 /// The components of HSV Color Picker
 ///
 /// Try to create a Color Picker with other layout on your own :)
+///
+library hsv_color_picker;
 
 import 'dart:math';
 import 'package:flutter/gestures.dart';
@@ -825,7 +827,7 @@ class ColorPickerLabel extends StatefulWidget {
   final List<ColorLabelType> colorLabelTypes;
 
   @override
-  _ColorPickerLabelState createState() => _ColorPickerLabelState();
+  State<ColorPickerLabel> createState() => _ColorPickerLabelState();
 }
 
 class _ColorPickerLabelState extends State<ColorPickerLabel> {
@@ -883,7 +885,9 @@ class _ColorPickerLabelState extends State<ColorPickerLabel> {
 
   List<Widget> colorValueLabels() {
     double fontSize = 14;
-    if (widget.textStyle != null && widget.textStyle?.fontSize != null) fontSize = widget.textStyle?.fontSize ?? 14;
+    if (widget.textStyle != null && widget.textStyle?.fontSize != null) {
+      fontSize = widget.textStyle?.fontSize ?? 14;
+    }
 
     return [
       for (String item in _colorTypes[_colorType] ?? [])
@@ -955,7 +959,7 @@ class ColorPickerInput extends StatefulWidget {
   final bool disable;
 
   @override
-  _ColorPickerInputState createState() => _ColorPickerInputState();
+  State<ColorPickerInput> createState() => _ColorPickerInputState();
 }
 
 class _ColorPickerInputState extends State<ColorPickerInput> {
@@ -971,11 +975,13 @@ class _ColorPickerInputState extends State<ColorPickerInput> {
   @override
   Widget build(BuildContext context) {
     if (inputColor != widget.color.value) {
-      textEditingController.text = '#' +
-          widget.color.red.toRadixString(16).toUpperCase().padLeft(2, '0') +
-          widget.color.green.toRadixString(16).toUpperCase().padLeft(2, '0') +
-          widget.color.blue.toRadixString(16).toUpperCase().padLeft(2, '0') +
-          (widget.enableAlpha ? widget.color.alpha.toRadixString(16).toUpperCase().padLeft(2, '0') : '');
+      final redHex = widget.color.red.toRadixString(16).toUpperCase().padLeft(2, '0');
+      final greenHex = widget.color.green.toRadixString(16).toUpperCase().padLeft(2, '0');
+      final blueHex = widget.color.blue.toRadixString(16).toUpperCase().padLeft(2, '0');
+      final alphaHex =
+          widget.enableAlpha ? widget.color.alpha.toRadixString(16).toUpperCase().padLeft(2, '0') : '';
+
+      textEditingController.text = '#$redHex$greenHex$blueHex$alphaHex';
     }
     return Padding(
       padding: const EdgeInsets.only(top: 5.0),
@@ -1280,7 +1286,8 @@ class ColorPickerArea extends StatelessWidget {
 
         return RawGestureDetector(
           gestures: {
-            _AlwaysWinPanGestureRecognizer: GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
+            _AlwaysWinPanGestureRecognizer:
+                GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
               () => _AlwaysWinPanGestureRecognizer(),
               (_AlwaysWinPanGestureRecognizer instance) {
                 instance
@@ -1364,7 +1371,8 @@ class ColorPickerHueRing extends StatelessWidget {
 
         return RawGestureDetector(
           gestures: {
-            _AlwaysWinPanGestureRecognizer: GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
+            _AlwaysWinPanGestureRecognizer:
+                GestureRecognizerFactoryWithHandlers<_AlwaysWinPanGestureRecognizer>(
               () => _AlwaysWinPanGestureRecognizer(),
               (_AlwaysWinPanGestureRecognizer instance) {
                 instance

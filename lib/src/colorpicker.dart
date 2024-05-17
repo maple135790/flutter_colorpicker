@@ -157,7 +157,7 @@ class ColorPicker extends StatefulWidget {
   final ValueChanged<List<Color>>? onHistoryChanged;
 
   @override
-  _ColorPickerState createState() => _ColorPickerState();
+  State<ColorPicker> createState() => _ColorPickerState();
 }
 
 class _ColorPickerState extends State<ColorPicker> {
@@ -166,8 +166,9 @@ class _ColorPickerState extends State<ColorPicker> {
 
   @override
   void initState() {
-    currentHsvColor =
-        (widget.pickerHsvColor != null) ? widget.pickerHsvColor as HSVColor : HSVColor.fromColor(widget.pickerColor);
+    currentHsvColor = (widget.pickerHsvColor != null)
+        ? widget.pickerHsvColor as HSVColor
+        : HSVColor.fromColor(widget.pickerColor);
     // If there's no initial text in `hexInputController`,
     if (widget.hexInputController?.text.isEmpty == true) {
       // set it to the current's color HEX value.
@@ -187,8 +188,9 @@ class _ColorPickerState extends State<ColorPicker> {
   @override
   void didUpdateWidget(ColorPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    currentHsvColor =
-        (widget.pickerHsvColor != null) ? widget.pickerHsvColor as HSVColor : HSVColor.fromColor(widget.pickerColor);
+    currentHsvColor = (widget.pickerHsvColor != null)
+        ? widget.pickerHsvColor as HSVColor
+        : HSVColor.fromColor(widget.pickerColor);
   }
 
   void colorPickerTextInputListener() {
@@ -291,7 +293,8 @@ class _ColorPickerState extends State<ColorPicker> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () => setState(() {
-                    if (widget.onHistoryChanged != null && !colorHistory.contains(currentHsvColor.toColor())) {
+                    if (widget.onHistoryChanged != null &&
+                        !colorHistory.contains(currentHsvColor.toColor())) {
                       colorHistory.add(currentHsvColor.toColor());
                       widget.onHistoryChanged!(colorHistory);
                     }
@@ -301,7 +304,8 @@ class _ColorPickerState extends State<ColorPicker> {
                 Expanded(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 40.0, width: widget.colorPickerWidth - 75.0, child: sliderByPaletteType()),
+                      SizedBox(
+                          height: 40.0, width: widget.colorPickerWidth - 75.0, child: sliderByPaletteType()),
                       if (widget.enableAlpha)
                         SizedBox(
                           height: 40.0,
@@ -370,7 +374,8 @@ class _ColorPickerState extends State<ColorPicker> {
                   const SizedBox(width: 20.0),
                   GestureDetector(
                     onTap: () => setState(() {
-                      if (widget.onHistoryChanged != null && !colorHistory.contains(currentHsvColor.toColor())) {
+                      if (widget.onHistoryChanged != null &&
+                          !colorHistory.contains(currentHsvColor.toColor())) {
                         colorHistory.add(currentHsvColor.toColor());
                         widget.onHistoryChanged!(colorHistory);
                       }
@@ -585,7 +590,11 @@ class _SlidePickerState extends State<SlidePicker> {
     }
     final List<TrackType> trackTypes = [
       if (widget.colorModel == ColorModel.hsv) ...[TrackType.hue, TrackType.saturation, TrackType.value],
-      if (widget.colorModel == ColorModel.hsl) ...[TrackType.hue, TrackType.saturationForHSL, TrackType.lightness],
+      if (widget.colorModel == ColorModel.hsl) ...[
+        TrackType.hue,
+        TrackType.saturationForHSL,
+        TrackType.lightness
+      ],
       if (widget.colorModel == ColorModel.rgb) ...[TrackType.red, TrackType.green, TrackType.blue],
       if (widget.enableAlpha) ...[TrackType.alpha],
     ];
@@ -666,7 +675,7 @@ class HueRingPicker extends StatefulWidget {
   final BorderRadius pickerAreaBorderRadius;
 
   @override
-  _HueRingPickerState createState() => _HueRingPickerState();
+  State<HueRingPicker> createState() => _HueRingPickerState();
 }
 
 class _HueRingPickerState extends State<HueRingPicker> {
@@ -775,7 +784,8 @@ class _HueRingPickerState extends State<HueRingPicker> {
                 SizedBox(
                   width: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
                   height: widget.colorPickerHeight - widget.hueRingStrokeWidth * 2,
-                  child: ColorPickerHueRing(currentHsvColor, onColorChanging, strokeWidth: widget.hueRingStrokeWidth),
+                  child: ColorPickerHueRing(currentHsvColor, onColorChanging,
+                      strokeWidth: widget.hueRingStrokeWidth),
                 ),
                 Column(
                   children: [
